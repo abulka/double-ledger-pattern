@@ -1,0 +1,7 @@
+[project]
+name = "double-ledger-design-pattern"
+version = "0.1.0"
+description = "A software architecture approach that applies the principles of double-entry bookkeeping to track resources, changes, and transactions in a system"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []

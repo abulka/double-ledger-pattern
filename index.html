@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Double Ledger Water Tank System</title>
+    <link id="watercss-link" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <style>
+        .flex-row { display: flex; gap: 2em; }
+        .section { margin-bottom: 2em; }
+        table { min-width: 300px; }
+        #transactions-table { min-width: 600px; }
+        .output { white-space: pre-wrap; background: #021934; padding: 1em; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Double Ledger Water Tank System</h1>
+    <div style="display: flex; align-items: center; gap: 1.5em; margin-bottom: 1.5em;">
+        <strong>Theme:</strong>
+        <label style="display: inline-flex; align-items: center; gap: 0.3em;">
+            <input type="radio" name="theme" value="auto" id="theme-auto" /> Auto
+        </label>
+        <label style="display: inline-flex; align-items: center; gap: 0.3em;">
+            <input type="radio" name="theme" value="light" id="theme-light" /> Light
+        </label>
+        <label style="display: inline-flex; align-items: center; gap: 0.3em;">
+            <input type="radio" name="theme" value="dark" id="theme-dark" /> Dark
+        </label>
+    </div>
+    <div class="section">
+        <h2>New Transaction</h2>
+        <form id="transaction-form">
+            <label>Description: <input type="text" id="desc" required></label>
+            <label>From: <select id="from" required></select></label>
+            <label>To: <select id="to" required></select></label>
+            <label>Amount: <input type="number" id="amount" min="1" required></label>
+            <button type="submit">Add Transaction</button>
+        </form>
+    </div>
+    <div class="flex-row">
+        <div class="section">
+            <h2>Accounts</h2>
+            <table id="accounts-table" border="1">
+                <thead>
+                    <tr><th>Account</th><th>Balance (liters)</th></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="section">
+            <h2>Transactions</h2>
+            <table id="transactions-table" border="1">
+                <thead>
+                    <tr><th>#</th><th>Description</th><th>From</th><th>To</th><th>Amount</th></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="section">
+        <button id="verify-btn">Verify Conservation</button>
+        <button id="dynamic-ver-btn">Print Dynamic Verification</button>
+        <button id="reset-btn">Demo Transactions</button>
+        <button id="clear-btn">Clear</button>
+    </div>
+    <div class="section">
+        <h2>Output</h2>
+        <div id="output" class="output"></div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
