@@ -239,7 +239,102 @@ By focusing on the underlying principle of conservation, balanced adjustments, a
 
 ## Appendix
 
-See also
+### Demos
+
+- Visit the [demo page](https://abulka.github.io/patterns/double-ledger/index.html) to see the double ledger in action with a water tank system. Built with JavaScript and HTML, this demo allows you to interactively transfer water between tanks, demonstrating the double ledger principles in a non-accounting context.
+  
+See screenshot above.
+
+- Python Example: Downlaod the repository (or just the file `main.py`) and run `python3 main.py` to see the double ledger in action with a water tank system.
+
+<details>
+<summary>Example Python output:</summary>
+
+```
+=== Water Tank System Demo ===
+Tracking water transfers - every drop must come from somewhere and go somewhere
+
+✓ Fill Tank A from reservoir
+  External_Reservoir: -100 (now -100)
+  Tank_A: +100 (now 100)
+
+Total water in system: 0 liters
+Current Balances:
+  External_Reservoir: -100 liters
+  Tank_A: 100 liters
+
+✓ Transfer from Tank A to Tank B
+  Tank_A: -30 (now 70)
+  Tank_B: +30 (now 30)
+
+Total water in system: 0 liters
+Current Balances:
+  External_Reservoir: -100 liters
+  Tank_A: 70 liters
+  Tank_B: 30 liters
+
+✓ Pump water into Tank A
+  Water_Pump_Source: -20 (now -20)
+  Tank_A: +20 (now 90)
+
+Total water in system: 0 liters
+Current Balances:
+  External_Reservoir: -100 liters
+  Tank_A: 90 liters
+  Tank_B: 30 liters
+  Water_Pump_Source: -20 liters
+
+✓ Tank B leaks to ground
+  Tank_B: -5 (now 25)
+  Environment: +5 (now 5)
+
+Total water in system: 0 liters
+Current Balances:
+  External_Reservoir: -100 liters
+  Tank_A: 90 liters
+  Tank_B: 25 liters
+  Water_Pump_Source: -20 liters
+  Environment: 5 liters
+
+Current Balances:
+  External_Reservoir: -100 liters
+  Tank_A: 90 liters
+  Tank_B: 25 liters
+  Water_Pump_Source: -20 liters
+  Environment: 5 liters
+
+=== Verification ===
+Environment: started with 0, gained 5, lost 0 (+5) = 5 liters
+Environment actual: 5 liters
+
+External_Reservoir: started with 0, gained 0, lost 100 (-100) = -100 liters
+External_Reservoir actual: -100 liters
+
+Tank_A: started with 0, gained 120, lost 30 (+100, -30, +20) = 90 liters
+Tank_A actual: 90 liters
+
+Tank_B: started with 0, gained 30, lost 5 (+30, -5) = 25 liters
+Tank_B actual: 25 liters
+
+Water_Pump_Source: started with 0, gained 0, lost 20 (-20) = -20 liters
+Water_Pump_Source actual: -20 liters
+
+=== Conservation Check ===
+Total water in system: 0 liters
+Notice: Total water = 0 because we track sources as negative
+This makes sense: we 'borrowed' 120L from external sources,
+and now have 90+25+5 = 120L in our system
+
+=== Transaction History ===
+1. Fill Tank A from reservoir: 100L from External_Reservoir to Tank_A
+2. Transfer from Tank A to Tank B: 30L from Tank_A to Tank_B
+3. Pump water into Tank A: 20L from Water_Pump_Source to Tank_A
+4. Tank B leaks to ground: 5L from Tank_B to Environment
+```
+
+</details>
+
+### See also
 
 - An [article](https://pgrs.net/2025/06/17/double-entry-ledgers-missing-primitive-in-modern-software/?utm_source=tldrnewsletter) that partly inspired this project
 
