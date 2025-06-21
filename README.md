@@ -2,7 +2,12 @@
 
 The double ledger design pattern could be considered a software architecture approach that applies the principles of double-entry bookkeeping to track resources, changes, and transactions in a system. It ensures that every change is recorded with both a source and a destination, maintaining balance and traceability.
 
-[Demo](https://abulka.github.io/double-ledger-pattern/) of double ledger idea in action with a water tank system. 
+## Example - water tank system
+
+This is an example of Double Ledger applied to a non accounting domain, specifically a water tank system. The system tracks water flow between tanks, ensuring that water is conserved and flows are properly accounted for. Every change has a source and a destination.
+
+[Demo](https://abulka.github.io/double-ledger-pattern/):
+![screenshot](doco/screenshot.png)
  
 ## Core Concepts
 
@@ -14,13 +19,6 @@ Any implementation of a "double ledger" needs to model:
 | **Containers** | Named entities that hold quantities of something. These represent the "places" where your tracked resource can exist. |
 | **Transactions** | Atomic operations that move quantities from one container to another. Each transaction must specify source container, destination container, amount, and reason. |
 
-also
-
-| Concept      | Description |
-|--------------|-------------|
-| **Journal** | An immutable log of all transactions in chronological order. This provides the complete audit trail. |
-| **Balances** | Current state derived from applying all transactions. These should always be calculable from the transaction history. |
-
 The "double-entry" idea ensures that every transaction is recorded in at least two containers, maintaining a balance between 'debits' and 'credits'.
 
 All verification of such a system needs to iterate through all transactions and show that:
@@ -28,7 +26,44 @@ All verification of such a system needs to iterate through all transactions and 
 - Container balances match the sum of all transactions affecting them
 - Total system quantity of `Things` is conserved (unless explicitly added/removed via designated entry/exit containers)
 
-### Core Models and Functions
+thus
+
+| Concept      | Description |
+|--------------|-------------|
+| **Journal** | An immutable log of all transactions in chronological order. This provides the complete audit trail. |
+| **Balances** | Current state derived from applying all transactions. These should always be calculable from the transaction history. |
+
+# Discussion
+
+Let's simplify and clarify the Double Ledger Principle for broader use:
+
+This principle is a design approach that focuses on conservation and accountability. At its core, it ensures that nothing appears from nowhere, and nothing disappears into nothing. Every change to a limited resource or system state is recorded as an equal and opposite adjustment. This means if something leaves one "container" or "state," it must simultaneously enter another, guaranteeing the total quantity or state remains consistent and verifiable. It's all about balancing and auditable traceability.
+
+## The "Double" Concept
+
+The "double" in double ledger comes from the fact that **every (atomic) transaction affects exactly two places**:
+
+1. **Something decreases somewhere** (the source container)
+2. **Something increases somewhere else** (the destination container)
+
+This creates a natural balance: the total amount lost from all sources always equals the total amount gained by all destinations. The system remains in equilibrium.
+
+## Forces
+
+**Conservation**: The total quantity in your system can only change through well-defined entry and exit points. Nothing is created or destroyed within the system itself.
+
+**Traceability**: Every change has a complete paper trail. You can always answer "where did this come from?" and "where did this go?"
+
+**Atomicity**: Changes happen as complete transfers. You can't have a source decrease without a corresponding destination increase.
+
+**Verification**: The system can self-audit. If your books don't balance, you know something went wrong.
+
+**Invariants**: The double-entry constraint acts as a continuous integrity check, preventing impossible states.
+
+> The key insight is that any system where you need to track **what changed**, **when it changed**, and **why it changed** can benefit from double ledger principles.
+> 
+
+## Core Models and Functions
 
 **Essential Data Structures:**
 ```
@@ -140,41 +175,6 @@ classDiagram
     note for Journal "Immutable audit log\nof all transactions"
 ```
 
-## Example - water tank system
-
-This is an example of Double Ledger applied to a non accounting domain, specifically a water tank system. The system tracks water flow between tanks, ensuring that water is conserved and flows are properly accounted for. Every change has a source and a destination.
-
-![screenshot](doco/screenshot.png)
-[Demo](https://abulka.github.io/double-ledger-pattern/). 
-
-Both a Python and a JavaScript version of the Double Ledger example are available in this repository. See the [demos](#demos) section below for more details.
-
-# Philosophy of Double Ledger
-
-Double ledger is fundamentally about **conservation and accountability**. At its core, it enforces a simple but powerful rule: **nothing appears from nowhere, and nothing disappears into nothing**. Every change in your system must have both a source and a destination.
-
-## The "Double" Concept
-
-The "double" in double ledger comes from the fact that **every (atomic) transaction affects exactly two places**:
-
-1. **Something decreases somewhere** (the source container)
-2. **Something increases somewhere else** (the destination container)
-
-This creates a natural balance: the total amount lost from all sources always equals the total amount gained by all destinations. The system remains in equilibrium.
-
-## Fundamental Principles
-
-**Conservation**: The total quantity in your system can only change through well-defined entry and exit points. Nothing is created or destroyed within the system itself.
-
-**Traceability**: Every change has a complete paper trail. You can always answer "where did this come from?" and "where did this go?"
-
-**Atomicity**: Changes happen as complete transfers. You can't have a source decrease without a corresponding destination increase.
-
-**Verification**: The system can self-audit. If your books don't balance, you know something went wrong.
-
-**Invariants**: The double-entry constraint acts as a continuous integrity check, preventing impossible states.
-
-> The key insight is that any system where you need to track **what changed**, **when it changed**, and **why it changed** can benefit from double ledger principles.
 
 ## Use in Software
 
@@ -195,17 +195,9 @@ Although double ledger comes from the world of accounting, the ideas can be appl
 - **Transactions**: "malloc()", "free()", "garbage_collect()"
 - **Verification**: Total memory = Free + Allocated
 
-# Discussion
+### Real-World Applications
 
-Let's redefine the **Double Ledger Principle** for broader application:
-
-It's a design approach where every change to a finite resource or system state is recorded as an *equal and opposite adjustment* across different 'containers' or 'states' of that resource, ensuring that the total quantity or consistent state is always maintained and verifiable. It's about **conservation, balancing, and auditable traceability**.
-
-Here's how this principle is demonstrably used in non-accounting domains:
-
----
-
-### Real-World Applications of the Double Ledger Principle in Non-Accounting Domains
+Here are some more real wold examples of the Double Ledger Principle in Non-Accounting Domains
 
 These systems don't use "debits" and "credits" but fundamentally rely on the principle of ensuring that what goes "out" of one pool/state must go "into" another, or be explicitly "consumed" or "created," with the total always balancing.
 
