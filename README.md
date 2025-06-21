@@ -2,6 +2,8 @@
 
 The double ledger design pattern could be considered a software architecture approach that applies the principles of double-entry bookkeeping to track resources, changes, and transactions in a system. It ensures that every change is recorded with both a source and a destination, maintaining balance and traceability.
 
+[Demo](https://abulka.github.io/double-ledger-pattern/) of double ledger idea in action with a water tank system. 
+ 
 ## Core Concepts
 
 Any implementation of a "double ledger" needs to model:
@@ -143,8 +145,9 @@ classDiagram
 This is an example of Double Ledger applied to a non accounting domain, specifically a water tank system. The system tracks water flow between tanks, ensuring that water is conserved and flows are properly accounted for. Every change has a source and a destination.
 
 ![screenshot](doco/screenshot.png)
+[Demo](https://abulka.github.io/double-ledger-pattern/). 
 
-Both a Python and a JavaScript version of the Double Ledger example are available in this repository.
+Both a Python and a JavaScript version of the Double Ledger example are available in this repository. See the [demos](#demos) section below for more details.
 
 # Philosophy of Double Ledger
 
@@ -241,11 +244,9 @@ By focusing on the underlying principle of conservation, balanced adjustments, a
 
 ### Demos
 
-- Visit the [demo page](https://abulka.github.io/patterns/double-ledger/index.html) to see the double ledger in action with a water tank system. Built with JavaScript and HTML, this demo allows you to interactively transfer water between tanks, demonstrating the double ledger principles in a non-accounting context.
-  
-See screenshot above.
+Visit the [demo page](https://abulka.github.io/double-ledger-pattern/) to see the double ledger in action with a water tank system. Built with JavaScript and HTML, this demo allows you to interactively transfer water between tanks, demonstrating the double ledger principles in a non-accounting context. (See screenshot above).
 
-- Python Example: Downlaod the repository (or just the file `main.py`) and run `python3 main.py` to see the double ledger in action with a water tank system.
+Python Example: Download [this repository](https://github.com/abulka/double-ledger-pattern) (or just the file `main.py`) and run `python3 main.py` to see the double ledger in action with a water tank system.
 
 <details>
 <summary>Example Python output:</summary>
